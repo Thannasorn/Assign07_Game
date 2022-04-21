@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     int res_iv[] = {R.id.imageView1, R.id.imageView2, R.id.imageView3,
             R.id.imageView4, R.id.imageView5, R.id.imageView6,
             R.id.imageView7, R.id.imageView8, R.id.imageView9};
@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         for (int n = 0; n < iv.length; n++) {
             iv[n] = (ImageView) findViewById(res_iv[n]);
             iv[n].setImageResource(fg);
-
         }
         timer1 = new CountDownTimer(20000, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -53,14 +52,12 @@ public class MainActivity extends AppCompatActivity {
                 iv[iNum].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (iNum != fg){
-                            int p1 = Integer.parseInt(point.getText().toString());
-                            p1 = p1 + 1;
-                            point.setText(Integer.toString(p1));
-                        }
-
+                        int p1 = Integer.parseInt(point.getText().toString());
+                        p1 = p1 + 1;
+                        point.setText(Integer.toString(p1));
                     }
                 });
+
             }
 
             public void onFinish() {
