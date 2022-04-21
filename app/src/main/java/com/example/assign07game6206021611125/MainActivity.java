@@ -7,6 +7,8 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -25,16 +27,21 @@ public class MainActivity extends AppCompatActivity {
     CountDownTimer timer1;
     Random rnd = new Random();
     int Max = res_image.length;
+    TextView point;
+    final String message = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        point = (TextView) findViewById(R.id.point);
         for (int n = 0; n < iv.length; n++) {
             iv[n] = (ImageView) findViewById(res_iv[n]);
             iv[n].setImageResource(fg);
+
         }
-        timer1 = new CountDownTimer(10000, 1000) {
+        timer1 = new CountDownTimer(20000, 1000) {
             public void onTick(long millisUntilFinished) {
                 if (oldNum != -1)
                     iv[oldNum].setImageResource(fg);
@@ -43,6 +50,17 @@ public class MainActivity extends AppCompatActivity {
                 iImage = rnd.nextInt(Max);
                 iv[iNum].setImageResource(res_image[iImage]);
                 oldNum = iNum;
+                iv[iNum].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (iNum != fg){
+                            int p1 = Integer.parseInt(point.getText().toString());
+                            p1 = p1 + 1;
+                            point.setText(Integer.toString(p1));
+                        }
+
+                    }
+                });
             }
 
             public void onFinish() {
@@ -55,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 timer1.start();
                 startButton.setEnabled(false);
+                point.setText(message);
             }
         });
     }
